@@ -1,24 +1,25 @@
 {
-  "name": "mixway-shared-config",
-  "version": "1.0.0",
-  "description": "mixway Teamが用いる共通設定パッケージの管理リポジトリ",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ValLaboratory/mixway-shared-config.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ValLaboratory/mixway-shared-config/issues"
-  },
-  "homepage": "https://github.com/ValLaboratory/mixway-shared-config#readme",
-  "devDependencies": {
-    "dprint": "^0.52.0"
-  }
+    "name": "mixway-shared-config",
+    "version": "1.0.0",
+    "description": "mixway Teamが用いる共通設定パッケージの管理リポジトリ",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "fmt": "dprint fmt",
+        "fmt:check": "dprint check"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ValLaboratory/mixway-shared-config.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ValLaboratory/mixway-shared-config/issues"
+    },
+    "homepage": "https://github.com/ValLaboratory/mixway-shared-config#readme",
+    "devDependencies": {
+        "dprint": "^0.52.0"
+    }
 }
