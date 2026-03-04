@@ -10,6 +10,10 @@ export default defineConfig([
     ]),
     js.configs.recommended,
     typescriptConfigs.strictTypeChecked,
+    // Note: 以下のimportルールは、ESLintのimportプラグイン(eslint-plugin-import)を使用する場合に有効になりますが、ライブラリの依存関係がコンフリクトしているため無効化しています。
+    // See: https://github.com/import-js/eslint-plugin-import/pull/3230
+    // importPlugin.flatConfigs.recommended,
+    // importPlugin.flatConfigs.typescript,
     {
         languageOptions: {
             parserOptions: {
