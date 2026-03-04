@@ -6,7 +6,8 @@
     "type": "module",
     "scripts": {
         "fmt": "dprint fmt",
-        "fmt:check": "dprint check"
+        "fmt:check": "dprint check",
+        "check": " tsc -b"
     },
     "repository": {
         "type": "git",
@@ -20,6 +21,8 @@
     },
     "homepage": "https://github.com/ValLaboratory/mixway-shared-config#readme",
     "devDependencies": {
-        "dprint": "^0.52.0"
+        "@types/node": "^25.3.3",
+        "dprint": "^0.52.0",
+        "typescript": "^5.9.3"
     }
 }
