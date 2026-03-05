@@ -9,11 +9,12 @@
         "check": " tsc -b",
         "lint": "eslint ."
     },
-    "files": [
-        "eslint.config.js",
-        "dprint.json",
-        "tsconfig.json"
-    ],
+    "exports": {
+        "./eslint": "./src/eslint/index.js",
+        "./tsconfig": "./src/tsconfig/tsconfig.json",
+        "./dprint": "./src/dprint/dprint.json",
+        "./*": "./src/*"
+    },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
     },
