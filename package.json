@@ -1,8 +1,7 @@
 {
     "name": "@vallaboratory/mixway-shared-config",
-    "version": "0.1.0",
-    "description": "mixway Teamが用いる共通設定パッケージの管理リポジトリ",
-    "main": "index.js",
+    "version": "0.2.0",
+    "description": "株式会社ヴァル研究所 mixway Teamが内部で利用する設定ファイルを配布するライブラリ",
     "type": "module",
     "scripts": {
         "fmt": "dprint fmt",
@@ -15,17 +14,8 @@
         "dprint.json",
         "tsconfig.json"
     ],
-    "peerDependencies": {
-        "@eslint/js": "^10.0.1",
-        "@types/node": "^25.3.3",
-        "dprint": "^0.52.0",
-        "eslint": "^10.0.2",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.56.1"
-    },
     "publishConfig": {
-        "registry": "https://npm.pkg.github.com",
-        "access": "restricted"
+        "registry": "https://npm.pkg.github.com"
     },
     "repository": {
         "type": "git",
@@ -33,17 +23,24 @@
     },
     "keywords": [],
     "author": "ValLaboratory",
-    "license": "ISC",
     "bugs": {
         "url": "https://github.com/ValLaboratory/mixway-shared-config/issues"
     },
     "homepage": "https://github.com/ValLaboratory/mixway-shared-config#readme",
-    "devDependencies": {
+    "dependencies": {
         "@eslint/js": "^10.0.1",
-        "@types/node": "^25.3.3",
+        "typescript-eslint": "^8.56.1"
+    },
+    "peerDependencies": {
+        "@types/node": "*",
+        "dprint": "*",
+        "eslint": ">=9.0.0",
+        "typescript": ">=5.9.0"
+    },
+    "devDependencies": {
+        "@types/node": "^24.11.0",
         "dprint": "^0.52.0",
         "eslint": "^10.0.2",
-        "typescript": "^5.9.3",
-        "typescript-eslint": "^8.56.1"
+        "typescript": "^5.9.3"
     }
 }
