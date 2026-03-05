@@ -1,6 +1,8 @@
 // @ts-check
 
+import { fixupConfigRules } from "@eslint/compat";
 import js from "@eslint/js";
+import importPlugin from "eslint-plugin-import";
 import { defineConfig, globalIgnores } from "eslint/config";
 import { configs as typescriptConfigs } from "typescript-eslint";
 
@@ -10,10 +12,11 @@ export default defineConfig([
     ]),
     js.configs.recommended,
     typescriptConfigs.strictTypeChecked,
-    // Note: 以下のimportルールは、ESLintのimportプラグイン(eslint-plugin-import)を使用する場合に有効になりますが、ライブラリの依存関係がコンフリクトしているため無効化しています。
+    // waiting for ESLint v10 support...
     // See: https://github.com/import-js/eslint-plugin-import/pull/3230
-    // importPlugin.flatConfigs.recommended,
-    // importPlugin.flatConfigs.typescript,
+    // TODO: eslint-plugin-importがESLint v10に対応したら、fixupConfigRulesを外す
+    fixupConfigRules(importPlugin.flatConfigs.recommended),
+    fixupConfigRules(importPlugin.flatConfigs.typescript),
     {
         languageOptions: {
             parserOptions: {
@@ -21,6 +24,16 @@ export default defineConfig([
                 tsconfigRootDir: import.meta.dirname,
                 ecmaVersion: "latest",
                 lib: ["ESNext"],
+            },
+        },
+    },
+    {
+        settings: {
+            "import/resolver": {
+                typescript: {
+                    alwaysTryTypes: true,
+                    project: ["./tsconfig.json"],
+                },
             },
         },
     },
@@ -69,32 +82,36 @@ export default defineConfig([
             // オブジェクトリテラルのプロパティでショートハンドを強制する
             "object-shorthand": ["error"],
 
-            // Note: 以下のimportルールは、ESLintのimportプラグイン(eslint-plugin-import)を使用する場合に有効になりますが、ライブラリの依存関係がコンフリクトしているため無効化しています。
-            // See: https://github.com/import-js/eslint-plugin-import/pull/3230
-
-            // // import文でNode.jsの組み込みモジュールを使用する場合、常に'node:'プロトコルを使用することを強制する
-            // "import/enforce-node-protocol-usage": ["error", "always"],
-            // // 絶対パスでのimportを禁止する
-            // "import/no-absolute-path": "error",
-            // // 不要なパスセグメントを含むimportを禁止する
-            // "import/no-useless-path-segments": "error",
-            // // import文はファイルの先頭にまとめることを強制する
-            // "import/first": "error",
-            // // import文で拡張子を付与することを強制する
-            // "import/extensions": ["error", "ignorePackages", {
-            //     checkTypeImports: true,
-            // }],
-            // // import文で変数の存在チェックをするかどうか
-            // // axiosでfalse positiveが発生するため無効化
-            // "import/namespace": ["off"],
-            // // デフォルトエクスポートを禁止する
-            // "import/no-default-export": "error",
+            // import文でNode.jsの組み込みモジュールを使用する場合、常に'node:'プロトコルを使用することを強制する
+            "import/enforce-node-protocol-usage": ["error", "always"],
+            // 絶対パスでのimportを禁止する
+            "import/no-absolute-path": "error",
+            // 不要なパスセグメントを含むimportを禁止する
+            "import/no-useless-path-segments": "error",
+            // import文はファイルの先頭にまとめることを強制する
+            "import/first": "error",
+            // import文で拡張子を付与することを強制する
+            "import/extensions": ["error", "ignorePackages", {
+                checkTypeImports: true,
+            }],
+            // import文で変数の存在チェックをするかどうか
+            // axiosでfalse positiveが発生するため無効化
+            "import/namespace": ["off"],
 
             // privateなクラスフィールドやメソッドには#を使用することを強制する
             "no-restricted-syntax": ["error", {
                 selector: ':matches(PropertyDefinition, MethodDefinition)[accessibility="private"]',
                 message: "Use #private instead",
             }],
+        },
+    },
+    {
+        ignores: [
+            "**/*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}",
+        ],
+        rules: {
+            // デフォルトエクスポートを禁止する
+            "import/no-default-export": "error",
         },
     },
 ]);
