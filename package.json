@@ -1,6 +1,6 @@
 {
     "name": "@vallaboratory/mixway-shared-config",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "mixway Teamが用いる共通設定パッケージの管理リポジトリ",
     "main": "index.js",
     "type": "module",
@@ -10,7 +10,6 @@
         "check": " tsc -b",
         "lint": "eslint ."
     },
-
     "files": [
         "eslint.config.js",
         "dprint.json",
