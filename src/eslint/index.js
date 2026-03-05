@@ -24,5 +24,6 @@ export function defaultRuleSets(options = {}) {
 export * from "./cdkRuleSets.js";
 export * from "./gitignoreRuleSets.js";
 export * from "./importRuleSets.js";
+export * from "./jsdocRuleSets.js";
 export * from "./linterOptionsRuleSets.js";
 export * from "./typescriptRuleSets.js";
