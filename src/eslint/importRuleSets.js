@@ -8,7 +8,7 @@ import { defineConfig } from "eslint/config";
 /**
  * @typedef {Object} ImportRuleSetOptions
  * @property {TypeScriptResolverOptions} [typescriptResolverOptions] eslint-import-resolver-typescriptのオプション。デフォルトでは、`tsconfig.json`をプロジェクトルートから読み込む設定になっています。 ref: https://www.npmjs.com/package/eslint-import-resolver-typescript
- * @property {string[]} [suppressDefaultExportWarning] default exportの使用を許可するファイル。デフォルトでは、`*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}`以外の全てのファイルでdefault exportが禁止されています。
+ * @property {string[]} [allowDefaultExportFiles] default exportの使用を許可するファイル。デフォルトでは、`*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}`以外の全てのファイルでdefault exportが禁止されています。
  */
 
 /**
@@ -60,7 +60,7 @@ export function importRuleSets(options = {}) {
         {
             ignores: [
                 "**/*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}",
-                ...(options.suppressDefaultExportWarning ?? []),
+                ...(options.allowDefaultExportFiles ?? []),
             ],
             rules: {
                 // デフォルトエクスポートを禁止する
