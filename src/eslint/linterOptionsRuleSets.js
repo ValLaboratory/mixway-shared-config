@@ -1,5 +1,3 @@
-// @ts-check
-
 import { defineConfig } from "eslint/config";
 
 /** ESLintのlinterOptionsに関するルール */

@@ -1,5 +1,3 @@
-// @ts-check
-
 import { fixupConfigRules } from "@eslint/compat";
 import importPlugin from "eslint-plugin-import";
 import { defineConfig } from "eslint/config";

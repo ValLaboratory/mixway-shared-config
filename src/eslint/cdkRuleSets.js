@@ -1,5 +1,3 @@
-// @ts-check
-
 import { configs as cdkConfigs } from "eslint-plugin-awscdk";
 import { defineConfig } from "eslint/config";
 

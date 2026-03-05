@@ -1,5 +1,3 @@
-// @ts-check
-
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import { configs as typescriptConfigs } from "typescript-eslint";
