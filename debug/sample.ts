@@ -9,7 +9,7 @@ switch (random) {
     case 1:
         console.log("one");
 
-    // eslint-disable-next-line no-fallthrough
+        // eslint-disable-next-line no-fallthrough
     case 2:
         console.log("two");
         break;

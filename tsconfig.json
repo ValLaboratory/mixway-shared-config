@@ -1,6 +1,7 @@
 {
     // 基本の型チェック設定
     "exclude": ["**/node_modules/**"],
+    "include": ["**/*"],
 
     "compilerOptions": {
         "strict": true,
@@ -12,7 +13,7 @@
         "moduleResolution": "NodeNext",
         "types": ["node"], // Node.jsの型定義を使用
         "allowJs": true, // JSファイルのimportを許可する
-        "checkJs": false, // 現時点ではJSファイルは型チェック対象外とする
+        "checkJs": true, // JSファイルの型チェックを行う
         "noEmit": true, // tscは型チェックのみを行う
         "allowImportingTsExtensions": true, // TypeScriptファイルをimportする際に拡張子.tsを使用する
         "resolveJsonModule": true, // JSONファイルのimportを許可する
