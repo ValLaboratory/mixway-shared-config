@@ -1,5 +1,5 @@
 {
-    "name": "mixway-shared-config",
+    "name": "@vallaboratory/mixway-shared-config",
     "version": "1.0.0",
     "description": "mixway Teamが用いる共通設定パッケージの管理リポジトリ",
     "main": "index.js",
@@ -10,12 +10,30 @@
         "check": " tsc -b",
         "lint": "eslint ."
     },
+
+    "files": [
+        "eslint.config.js",
+        "dprint.json",
+        "tsconfig.json"
+    ],
+    "peerDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^25.3.3",
+        "dprint": "^0.52.0",
+        "eslint": "^10.0.2",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.56.1"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com",
+        "access": "restricted"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ValLaboratory/mixway-shared-config.git"
     },
     "keywords": [],
-    "author": "",
+    "author": "ValLaboratory",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/ValLaboratory/mixway-shared-config/issues"
