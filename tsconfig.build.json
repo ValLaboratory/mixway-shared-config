@@ -1,0 +1,19 @@
+// ビルド時にのみ利用されるtsconfig.json
+{
+    "extends": "./src/tsconfig/tsconfig.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "incremental": false,
+        "declaration": true,
+        "allowImportingTsExtensions": false,
+        "rewriteRelativeImportExtensions": true,
+        "rootDir": "src",
+        "outDir": "dist"
+    },
+    "include": [
+        "src/eslint/**/*.js",
+        "src/eslint/**/*.ts",
+        "src/eslint/**/*.json"
+    ],
+    "exclude": ["**/node_modules/**"]
+}

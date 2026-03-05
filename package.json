@@ -7,16 +7,20 @@
         "fmt": "dprint fmt",
         "fmt:check": "dprint check",
         "check": " tsc",
-        "lint": "eslint ."
+        "lint": "npx eslint --flag unstable_native_nodejs_ts_config",
+        "build": "node build/build.ts"
     },
     "files": [
-        "src/"
+        "dist/"
     ],
     "exports": {
-        "./eslint": "./src/eslint/index.js",
-        "./tsconfig": "./src/tsconfig/tsconfig.json",
-        "./dprint": "./src/dprint/dprint.json",
-        "./*": "./src/*"
+        "./eslint": {
+            "types": "./dist/eslint/index.d.ts",
+            "default": "./dist/eslint/index.js"
+        },
+        "./tsconfig": "./dist/tsconfig/tsconfig.json",
+        "./dprint": "./dist/dprint/dprint.json",
+        "./*": "./dist/*"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
@@ -51,6 +55,7 @@
     "devDependencies": {
         "@types/node": "^24.11.0",
         "dprint": "^0.52.0",
+        "esbuild": "^0.27.3",
         "eslint": "^10.0.2",
         "typescript": "^5.9.3"
     }

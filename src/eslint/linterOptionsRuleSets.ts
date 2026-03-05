@@ -1,6 +1,9 @@
 import { defineConfig } from "eslint/config";
 
-/** ESLintのlinterOptionsに関するルール */
+/**
+ * ESLintのlinterOptionsに関するルール
+ * @returns ESLintのルールセット
+ */
 export function linterOptionsRuleSets() {
     return defineConfig([
         {

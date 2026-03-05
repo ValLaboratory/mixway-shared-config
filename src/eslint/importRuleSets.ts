@@ -1,19 +1,26 @@
 import { fixupConfigRules } from "@eslint/compat";
+import type { TypeScriptResolverOptions } from "eslint-import-resolver-typescript";
 import importPlugin from "eslint-plugin-import";
 import { defineConfig } from "eslint/config";
-/** @import { TypeScriptResolverOptions } from "eslint-import-resolver-typescript" */
 
-/**
- * @typedef {Object} ImportRuleSetOptions
- * @property {TypeScriptResolverOptions} [typescriptResolverOptions] eslint-import-resolver-typescriptのオプション。デフォルトでは、`tsconfig.json`をプロジェクトルートから読み込む設定になっています。 ref: https://www.npmjs.com/package/eslint-import-resolver-typescript
- * @property {string[]} [allowDefaultExportFiles] default exportの使用を許可するファイル。デフォルトでは、`*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}`以外の全てのファイルでdefault exportが禁止されています。
- */
+export interface ImportRuleSetOptions {
+    /**
+     * eslint-import-resolver-typescriptのオプション。デフォルトでは、`tsconfig.json`をプロジェクトルートから読み込む設定になっています。
+     * ref: https://www.npmjs.com/package/eslint-import-resolver-typescript
+     */
+    typescriptResolverOptions?: TypeScriptResolverOptions;
+    /**
+     * default exportの使用を許可するファイル。デフォルトでは、`*.config.{ts,cts,mts,js,cjs,mjs,tsx,jsx}`以外の全てのファイルでdefault exportが禁止されています。
+     */
+    allowDefaultExportFiles?: string[];
+}
 
 /**
  * import文に関するESLintルール
- * @param {ImportRuleSetOptions} options
+ * @param options オプション
+ * @returns ESLintのルールセット
  */
-export function importRuleSets(options = {}) {
+export function importRuleSets(options: ImportRuleSetOptions = {}) {
     return defineConfig([
         // リゾルバ設定
         {

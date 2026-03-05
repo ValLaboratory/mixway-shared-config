@@ -1,7 +1,11 @@
+// eslint-disable-next-line import/no-named-as-default
 import jsdoc from "eslint-plugin-jsdoc";
 import { defineConfig } from "eslint/config";
 
-/** JSDocに関するESLintルール */
+/**
+ * JSDocに関するESLintルール
+ * @returns ESLintのルールセット
+ */
 export function jsdocRuleSets() {
     return defineConfig([
         // plugin読み込み

@@ -1,16 +1,17 @@
 import { configs as cdkConfigs } from "eslint-plugin-awscdk";
 import { defineConfig } from "eslint/config";
 
-/**
- * @typedef CdkRuleSetOptions
- * @property {string[]} [cdkFiles] CDKコンストラクトのファイルパターンの配列。デフォルトは`[]`。
- */
+export interface CdkRuleSetOptions {
+    /** CDKコンストラクトのファイルパターンの配列。デフォルトは`[]`。 */
+    cdkFiles?: string[];
+}
 
 /**
  * CDK用のESLintルール
- * @param {CdkRuleSetOptions} [options] オプション
+ * @param options オプション
+ * @returns ESLintのルールセット
  */
-export function cdkRuleSets(options = {}) {
+export function cdkRuleSets(options: CdkRuleSetOptions = {}) {
     return defineConfig([
         // cdk用の設定
         {

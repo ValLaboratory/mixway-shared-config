@@ -1,28 +1,30 @@
 import js from "@eslint/js";
+import type { FlatConfig } from "@typescript-eslint/utils/ts-eslint";
 import { defineConfig } from "eslint/config";
 import { configs as typescriptConfigs } from "typescript-eslint";
-/** @import { FlatConfig } from "@typescript-eslint/utils/ts-eslint" */
 
-/**
- * @typedef {Object} TypeScriptRuleSetOptions
- * @property {FlatConfig.LanguageOptions} [languageOptions]
- * ESLintの`languageOptions`。デフォルト値は以下の通り。
- * ```js
- * {
- *     parserOptions: {
- *         projectService: true,
- *         ecmaVersion: "latest",
- *         lib: ["ESNext"],
- *     },
- * }
- * ```
- */
+export interface TypeScriptRuleSetOptions {
+    /**
+     * ESLintの`languageOptions`。デフォルト値は以下の通り。
+     * ```ts
+     * {
+     *     parserOptions: {
+     *         projectService: true,
+     *         ecmaVersion: "latest",
+     *         lib: ["ESNext"],
+     *     },
+     * }
+     * ```
+     */
+    languageOptions?: FlatConfig.LanguageOptions;
+}
 
 /**
  * TypeScriptプロジェクト向けのESLintルール
- * @param {TypeScriptRuleSetOptions} options
+ * @param options オプション
+ * @returns ESLintのルールセット
  */
-export function typescriptRuleSets(options = {}) {
+export function typescriptRuleSets(options: TypeScriptRuleSetOptions = {}) {
     return defineConfig([
         // パーサー設定
         {

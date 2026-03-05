@@ -15,7 +15,7 @@ switch (random) {
         break;
 }
 
-// eslint-disable-next-line max-params
+// eslint-disable-next-line max-params, jsdoc/require-jsdoc
 function add(a: number, b: number, c: number, d: number) {
     const sum = a + b + c + d;
     return {
