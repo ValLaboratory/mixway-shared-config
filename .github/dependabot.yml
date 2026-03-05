@@ -1,0 +1,11 @@
+# https://docs.github.com/ja/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/controlling-dependencies-updated
+
+version: 2
+updates:
+    - package-ecosystem: "npm"
+      directory: "/"
+      schedule:
+          interval: "weekly"
+          day: "tuesday"
+          time: "09:00"
+          timezone: "Asia/Tokyo"
