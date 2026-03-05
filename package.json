@@ -1,6 +1,6 @@
 {
     "name": "@vallaboratory/mixway-shared-config",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "株式会社ヴァル研究所 mixway Teamが内部で利用する設定ファイルを配布するライブラリ",
     "type": "module",
     "scripts": {
@@ -9,6 +9,9 @@
         "check": " tsc -b",
         "lint": "eslint ."
     },
+    "files": [
+        "src/"
+    ],
     "exports": {
         "./eslint": "./src/eslint/index.js",
         "./tsconfig": "./src/tsconfig/tsconfig.json",
