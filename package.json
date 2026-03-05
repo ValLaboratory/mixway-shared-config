@@ -6,7 +6,7 @@
     "scripts": {
         "fmt": "dprint fmt",
         "fmt:check": "dprint check",
-        "check": " tsc -b",
+        "check": " tsc",
         "lint": "eslint ."
     },
     "files": [
