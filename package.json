@@ -6,7 +6,7 @@
     "scripts": {
         "fmt": "dprint fmt",
         "fmt:check": "dprint check",
-        "check": " tsc",
+        "check": "tsc",
         "lint": "npx eslint --flag unstable_native_nodejs_ts_config",
         "build": "node build/build.ts"
     },
