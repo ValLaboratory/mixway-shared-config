@@ -9,3 +9,12 @@ updates:
           day: "tuesday"
           time: "09:00"
           timezone: "Asia/Tokyo"
+      labels:
+          - dependencies
+      groups:
+          minor-and-patch:
+              patterns:
+                  - "*"
+              update-types:
+                  - "minor"
+                  - "patch"
