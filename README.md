@@ -25,6 +25,7 @@ tsconfig.json
     "extends": "@vallaboratory/mixway-shared-config/tsconfig",
     "compilerOptions": {
         // プロジェクト固有の設定をここに追加
+        "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo" // キャッシュファイルのパス
     }
 }
 ```

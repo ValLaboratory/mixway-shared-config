@@ -1,6 +1,8 @@
 {
     "extends": "./src/tsconfig/tsconfig.json",
-    // 基本の型チェック設定
     "exclude": ["**/node_modules/**"],
-    "include": ["**/*"]
+    "include": ["**/*"],
+    "compilerOptions": {
+        "tsBuildInfoFile": "./node_modules/.cache/tsconfig.tsbuildinfo" // キャッシュファイルのパス
+    }
 }
