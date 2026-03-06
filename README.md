@@ -38,7 +38,7 @@ import { defineConfig } from "eslint/config";
 export default defineConfig([
     defaultRuleSets(),
     // デフォルトに含まれていないルールセットは適宜追加
-    // cdkRuleSet(),
+    // cdkRuleSets(),
     // jsdocRuleSets(),
     {
         rules: {
