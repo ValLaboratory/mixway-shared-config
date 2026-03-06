@@ -3,6 +3,7 @@ name: Publish package to GitHub Packages
 on:
     release:
         types: [published]
+    # 開発用
     push:
 
 jobs:
