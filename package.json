@@ -53,7 +53,7 @@
         "typescript": ">=5.9.0"
     },
     "devDependencies": {
-        "@types/node": "^24.11.0",
+        "@types/node": "^25.3.5",
         "dprint": "^0.52.0",
         "eslint": "^10.0.2",
         "typescript": "^5.9.3"
