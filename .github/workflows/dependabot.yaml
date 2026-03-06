@@ -1,0 +1,34 @@
+name: Dependabot Custom Labels and Auto-merge
+
+on:
+    pull_request:
+        types: [opened, synchronize, reopened]
+
+permissions:
+    pull-requests: write # PRのラベル変更とマージに必要な権限
+    contents: write # マージコミットを作成するために必要な権限
+
+jobs:
+    dependabot-automation:
+        runs-on: ubuntu-latest
+        # Dependabotが作成したPRの時だけ実行する
+        if: github.actor == 'dependabot[bot]'
+        steps:
+            - name: Dependabotの情報を取得
+              id: metadata
+              uses: dependabot/fetch-metadata@v2
+
+            - name: メジャーアップデートなら専用ラベルを付与
+              if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+              run: gh pr edit "$PR_URL" --add-label "major-update, attention-needed"
+              env:
+                  PR_URL: ${{ github.event.pull_request.html_url }}
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: マイナー・パッチアップデートなら自動マージを有効化
+              # メジャーアップデート「ではない」場合に実行
+              if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+              run: gh pr merge --auto --squash "$PR_URL"
+              env:
+                  PR_URL: ${{ github.event.pull_request.html_url }}
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
