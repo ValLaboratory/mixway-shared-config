@@ -1,7 +1,5 @@
 {
     "compilerOptions": {
-        "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo", // キャッシュファイルのパス (必要に応じてoverrideしてください)
-
         "strict": true,
         "target": "ESNext",
         "lib": ["ESNext"],
