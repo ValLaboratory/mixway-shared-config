@@ -63,7 +63,7 @@ npm install --save-dev @vallaboratory/mixway-shared-config
 
 [Flat Config](https://eslint.org/docs/latest/use/configure/configuration-files)形式でESLint設定を作成します。
 
-```typescript
+```javascript
 import { defaultRuleSets } from "@vallaboratory/mixway-shared-config/eslint";
 import { defineConfig } from "eslint/config";
 
@@ -99,9 +99,9 @@ export default defineConfig([
 
 ##### `jsdocRuleSets()`
 
-JSDocに関するルールセットです。TypeScriptファイル（`.ts`, `.tsx`等）には`jsdoc/recommended-typescript-error`、JavaScriptファイル（`.js`, `.mjs`等）には`jsdoc/recommended-error`が適用されます。
+JSDocに関するルールセットです。TypeScriptファイル（`.ts`, `.tsx`等）には`flat/recommended-typescript-error`、JavaScriptファイル（`.js`, `.mjs`等）には`flat/recommended-error`が適用されます。
 
-```typescript
+```javascript
 import {
     defaultRuleSets,
     jsdocRuleSets,
