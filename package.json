@@ -36,7 +36,7 @@
     },
     "homepage": "https://github.com/ValLaboratory/mixway-shared-config#readme",
     "dependencies": {
-        "@eslint/compat": "^2.0.2",
+        "@eslint/compat": "^2.0.3",
         "@eslint/js": "^10.0.1",
         "@typescript-eslint/parser": "^8.56.1",
         "eslint-config-flat-gitignore": "^2.2.1",
@@ -55,7 +55,7 @@
     "devDependencies": {
         "@types/node": "^25.3.5",
         "dprint": "^0.52.0",
-        "eslint": "^10.0.2",
+        "eslint": "^10.0.3",
         "typescript": "^5.9.3"
     }
 }
