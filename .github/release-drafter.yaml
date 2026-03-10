@@ -1,6 +1,8 @@
 name-template: "v$RESOLVED_VERSION"
 tag-template: "v$RESOLVED_VERSION"
 
+change-template: "- $TITLE by @$AUTHOR in [#$NUMBER]($URL)"
+
 # バージョン管理設定
 version-resolver:
     major:
@@ -16,8 +18,8 @@ version-resolver:
 
 # リリースノートのテンプレート
 template: |
-    # What's Changed
+    ## What's Changed
 
     $CHANGES
 
-    **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+    **Full Changelog**: [`$PREVIOUS_TAG...v$RESOLVED_VERSION`](https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION)
