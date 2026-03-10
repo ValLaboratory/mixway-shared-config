@@ -1,0 +1,21 @@
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+# バージョン管理設定
+version-resolver:
+    major:
+        labels:
+            - "major"
+    minor:
+        labels:
+            - "minor"
+    patch:
+        labels:
+            - "patch"
+    default: "minor" # ラベル無しのPRはマイナーバージョンをインクリメント
+
+# リリースノートのテンプレート
+template: |
+    ## Changes
+
+    $CHANGES
