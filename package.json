@@ -30,6 +30,7 @@
         "url": "git+https://github.com/ValLaboratory/mixway-shared-config.git"
     },
     "keywords": [],
+    "license": "MIT",
     "author": "ValLaboratory",
     "bugs": {
         "url": "https://github.com/ValLaboratory/mixway-shared-config/issues"
