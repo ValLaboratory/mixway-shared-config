@@ -1,5 +1,5 @@
 name-template: "v$RESOLVED_VERSION"
-tag-template: "v$RESOLVED_VERSION"
+tag-template: "draft-$RESOLVED_VERSION" # draft-1.2.3 という一時タグ
 
 change-template: "- $TITLE by @$AUTHOR in [#$NUMBER]($URL)"
 
