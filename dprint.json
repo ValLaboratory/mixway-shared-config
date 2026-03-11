@@ -1,3 +1,6 @@
 {
-    "extends": "./src/dprint/dprint.json"
+    "extends": "./src/dprint/dprint.json",
+    "excludes": [
+        "dist"
+    ]
 }
