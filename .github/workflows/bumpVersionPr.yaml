@@ -1,0 +1,52 @@
+name: Create Version Bump PR
+
+on:
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: write
+    pull-requests: write # PRを作成するための権限です
+
+jobs:
+    create-pr:
+        # 無限ループを防ぐため、コミットメッセージが「chore: bump version」から始まる場合はスキップします
+        if: "!startsWith(github.event.head_commit.message, 'chore: bump version')"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v6
+              with:
+                  node-version: "24"
+
+            - name: Bump Version
+              run: |
+                  # package.jsonのバージョンを1つ上げます（Gitのタグはまだ作りません）
+                  npm version minor --no-git-tag-version
+
+            - name: Create Pull Request
+              # GitHub CLIを使ってPRを作成します
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "github-actions[bot]@users.noreply.github.com"
+                  git switch -c auto/bump-version
+                  git add package.json package-lock.json
+                  git commit -m "chore: bump version"
+                  git push -f origin auto/bump-version
+
+                  # 既存のPRがあればそのまま、なければ新規作成
+                  EXISTING_PR=$(gh pr list --head auto/bump-version --base main --state open --json number --jq '.[0].number')
+                  if [ -z "$EXISTING_PR" ]; then
+                    gh pr create \
+                      --title "chore: bump version" \
+                      --body "バージョンアップの準備ができました。このPRをマージすると、リリース作業（ビルドとドラフトリリース）が自動で開始されます。" \
+                      --base main \
+                      --head auto/bump-version
+                  fi
