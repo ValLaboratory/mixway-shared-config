@@ -1,20 +1,42 @@
 name: Release package
 
 on:
-    release:
-        types: [published]
+    push:
+        branches:
+            - main
 
 permissions:
     contents: write
 
 jobs:
-    release:
+    check-status:
         runs-on: ubuntu-latest
+
         steps:
             - name: Checkout code
               uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: ./.github/actions/setup-node
+
+            # package.jsonのバージョンが更新され、リリース待ち状態になっているかどうか
+            - name: Check if release is ready
+              id: check-release-ready
+              uses: ./.github/actions/check-release-ready
+
+        outputs:
+            ready: ${{ steps.check-release-ready.outputs.ready }}
+            package-version: ${{ steps.check-release-ready.outputs.package-version }}
+
+    release:
+        runs-on: ubuntu-latest
+
+        needs: check-status
+        if: needs.check-status.outputs.ready == 'true'
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
 
             - name: Setup Node.js
               uses: ./.github/actions/setup-node
@@ -25,46 +47,25 @@ jobs:
             - name: Build package
               run: npm run build
 
-            - name: Commit dist to release branch
-              id: commit
-              run: |
-                  # 1. ドラフトタグからバージョン情報を抽出する（例: draft-1.2.3 → 1.2.3 → v1.2.3）
-                  DRAFT_TAG="${{ github.event.release.tag_name }}"
-                  VERSION="${DRAFT_TAG#draft-}"
-                  SEMVER_TAG="v${VERSION}"
-                  MAJOR=$(echo "$VERSION" | cut -d. -f1)
-                  BRANCH="release/v${MAJOR}"
-
-                  # 2. 後続のステップで参照できるよう、変数をGitHub Outputsに出力する
-                  echo "version=${VERSION}" >> $GITHUB_OUTPUT
-                  echo "semver_tag=${SEMVER_TAG}" >> $GITHUB_OUTPUT
-                  echo "draft_tag=${DRAFT_TAG}" >> $GITHUB_OUTPUT
-                  echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
-
-                  # 3. リリースブランチにビルド成果物（dist/）をコミットして強制プッシュする
-
-                  git checkout -B "$BRANCH"
-                  git add dist/ -f
-                  git commit -m "release: ${SEMVER_TAG}"
-                  git push origin "$BRANCH" --force
-
-            - name: Create release tag on release branch
-              run: |
-                  git tag "${{ steps.commit.outputs.semver_tag }}"
-                  git push origin "${{ steps.commit.outputs.semver_tag }}"
-
-            - name: Delete temporary draft tag
+            - name: Commit dist and create tag
               env:
-                  DRAFT_TAG: ${{ steps.commit.outputs.draft_tag }}
+                  VERSION: ${{ needs.check-status.outputs.package-version }}
               run: |
-                  git push origin ":refs/tags/$DRAFT_TAG"
+                  # distフォルダをステージングしてコミット（.gitignoreで除外されているため-fで強制追加）
+                  git add -f dist/
+                  git commit -m "release v${VERSION}"
 
-            - name: Update release tag and name
+                  # バージョン番号でタグを打つ
+                  git tag "v${VERSION}"
+
+                  # タグのみプッシュ（ブランチはプッシュしない）
+                  git push origin "v${VERSION}"
+
+            - name: Create GitHub Release
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  DRAFT_TAG: ${{ steps.commit.outputs.draft_tag }}
-                  SEMVER_TAG: ${{ steps.commit.outputs.semver_tag }}
+                  VERSION: ${{ needs.check-status.outputs.package-version }}
               run: |
-                  gh release edit "$DRAFT_TAG" \
-                    --tag "$SEMVER_TAG" \
-                    --title "$SEMVER_TAG"
+                  gh release create "v${VERSION}" \
+                    --title "v${VERSION}" \
+                    --generate-notes

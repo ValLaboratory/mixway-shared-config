@@ -75,6 +75,34 @@ export default defineConfig([
 
 ## 開発
 
+### Release Flow
+
+mainブランチへのマージをトリガーに、バージョンアップPRの作成とリリースが自動で行われます。
+
+```mermaid
+flowchart TB
+    subgraph リリース準備
+        direction LR
+        A1((トリガー:<br>機能PRを<br>mainにマージ)) --> A2{package.jsonのバージョン===最新リリース?}
+
+        A2 -- 一致 --> A3["package.jsonのバージョンを更新し、PRを作成(自動)"]
+        A3 --> A4["PRをマージ(手動)"]
+        A2 -- 不一致 --> A5(("終了<br>(リリース準備済み)"))
+    end
+
+    リリース準備 --> リリース
+
+    subgraph リリース
+        direction LR
+        B1((トリガー:<br>バージョン更新PRを<br>mainにマージ)) --> B2{package.jsonのバージョン====最新リリース?}
+
+        B2 -- 一致 --> B3(("終了<br>(リリース済み)"))
+        B2 -- 不一致 --> B4["ビルドを実行しリリース(自動)"]
+    end
+```
+
+### commands
+
 ```shell
 # フォーマット
 npm run fmt
