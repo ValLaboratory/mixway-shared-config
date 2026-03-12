@@ -4,12 +4,14 @@ export default defineConfig({
     root: "./src",
     entry: [
         "./src/eslint/*",
-        "./src/dprint/*",
     ],
     // tsconfig.jsonはJSONC形式で、entryに指定するとパースに失敗するため、distにコピーする
     copy: [{
         from: "src/tsconfig/tsconfig.json",
         to: "dist/tsconfig/",
+    }, {
+        from: "src/dprint/dprint.json",
+        to: "dist/dprint/",
     }],
     // 3rd party moduleはバンドルしない
     deps: {
