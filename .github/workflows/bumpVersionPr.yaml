@@ -1,3 +1,5 @@
+# mainブランチが更新されたときに、リリース準備のPRを作成するワークフロー
+
 name: Create Version Bump PR
 
 on:

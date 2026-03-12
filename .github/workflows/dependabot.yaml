@@ -1,3 +1,4 @@
+# Dependabotが作成したPRの自動マージ、自動ラベル付与を行うワークフロー
 name: Dependabot Custom Labels and Auto-merge
 
 on:
