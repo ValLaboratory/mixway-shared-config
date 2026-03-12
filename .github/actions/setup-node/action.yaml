@@ -1,0 +1,30 @@
+name: Setup Node.js
+description: Node.jsのセットアップとnpm依存パッケージのインストールを行うComposite Action
+
+inputs:
+    node-version:
+        description: "Node.jsのバージョンを指定します。例: 22, 24"
+        required: false
+        default: "24"
+
+runs:
+    using: composite
+    steps:
+        - name: Use Node.js
+          uses: actions/setup-node@v6
+          with:
+              node-version: ${{ inputs.node-version }}
+
+        - name: Cache node_modules
+          id: cache-node-modules
+          uses: actions/cache@v5
+          with:
+              path: node_modules
+              key: ${{ runner.os }}-node-${{ inputs.node-version }}-${{ hashFiles('package-lock.json') }}
+              restore-keys: |
+                  ${{ runner.os }}-node-${{ inputs.node-version }}-
+
+        - name: Install dependencies
+          if: steps.cache-node-modules.outputs.cache-hit != 'true'
+          shell: bash
+          run: npm ci

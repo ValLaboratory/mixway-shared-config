@@ -1,3 +1,4 @@
+# Dependabotが作成したPRの自動マージ、自動ラベル付与を行うワークフロー
 name: Dependabot Custom Labels and Auto-merge
 
 on:
@@ -11,6 +12,7 @@ permissions:
 jobs:
     dependabot-automation:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
         # Dependabotが作成したPRの時だけ実行する
         if: github.actor == 'dependabot[bot]'
         steps:

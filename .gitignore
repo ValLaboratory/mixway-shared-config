@@ -35,7 +35,7 @@ bower_components
 .lock-wscript
 
 # Build output
-# dist/
+dist/
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
@@ -83,7 +83,7 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-# dist
+dist
 
 # Gatsby files
 .cache/

@@ -1,0 +1,11 @@
+name: Setup Git user
+description: GitHub Actions Bot としてGitユーザーを設定するComposite Action
+
+runs:
+    using: composite
+    steps:
+        - name: Setup Git user
+          shell: bash
+          run: |
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

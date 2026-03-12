@@ -1,0 +1,37 @@
+name: Check release ready
+description: package.jsonのバージョンとリリース済みバージョンを比較し、次のリリースを待っている状態かどうかを判定するComposite Action
+
+outputs:
+    ready:
+        description: "次のリリースの準備ができている場合はtrue、そうでない場合はfalse"
+        value: ${{ steps.check.outputs.ready }}
+    package-version:
+        description: "package.jsonに記載されているバージョン（例: 0.13.0）"
+        value: ${{ steps.package-version.outputs.version }}
+    release-version:
+        description: "最新リリースのバージョン（例: 0.13.0）。リリースが存在しない場合は空文字列"
+        value: ${{ steps.release-version.outputs.version }}
+
+runs:
+    using: composite
+    steps:
+        - name: Get package version
+          id: package-version
+          uses: ./.github/actions/get-package-version
+
+        - name: Get latest release version
+          id: release-version
+          uses: ./.github/actions/get-latest-release-version
+
+        - name: Compare versions
+          id: check
+          shell: bash
+          env:
+              PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
+              RELEASE_VERSION: ${{ steps.release-version.outputs.version }}
+          run: |
+              if [ "$PACKAGE_VERSION" != "$RELEASE_VERSION" ]; then
+                  echo "ready=true" >> "$GITHUB_OUTPUT"
+              else
+                  echo "ready=false" >> "$GITHUB_OUTPUT"
+              fi
