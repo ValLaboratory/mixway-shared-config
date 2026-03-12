@@ -18,13 +18,11 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v6
 
-            - name: Setup Git user
-              run: |
-                  git config user.name "github-actions[bot]"
-                  git config user.email "github-actions[bot]@users.noreply.github.com"
-
             - name: Setup Node.js
               uses: ./.github/actions/setup-node
+
+            - name: Setup Git user
+              uses: ./.github/actions/setup-git-user
 
             - name: Build
               run: npm run build

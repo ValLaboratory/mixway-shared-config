@@ -19,6 +19,9 @@ jobs:
             - name: Setup Node.js
               uses: ./.github/actions/setup-node
 
+            - name: Setup Git user
+              uses: ./.github/actions/setup-git-user
+
             - name: Build package
               run: npm run build
 
@@ -39,8 +42,6 @@ jobs:
                   echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
 
                   # 3. リリースブランチにビルド成果物（dist/）をコミットして強制プッシュする
-                  git config user.name "github-actions[bot]"
-                  git config user.email "github-actions[bot]@users.noreply.github.com"
 
                   git checkout -B "$BRANCH"
                   git add dist/ -f
