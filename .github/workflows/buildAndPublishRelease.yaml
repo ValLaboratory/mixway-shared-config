@@ -24,14 +24,10 @@ jobs:
                   git config user.email "github-actions[bot]@users.noreply.github.com"
 
             - name: Setup Node.js
-              uses: actions/setup-node@v6
-              with:
-                  node-version: "24"
+              uses: ./.github/actions/setup-node
 
-            - name: Install and Build
-              run: |
-                  npm ci
-                  npm run build
+            - name: Build
+              run: npm run build
 
             - name: Get current version
               id: package-version
