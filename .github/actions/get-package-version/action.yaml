@@ -1,0 +1,17 @@
+name: Get package version
+description: package.jsonからバージョンを取得するComposite Action
+
+outputs:
+    version:
+        description: "package.jsonに記載されているバージョン（例: 0.14.0）"
+        value: ${{ steps.version.outputs.version }}
+
+runs:
+    using: composite
+    steps:
+        - name: Get version from package.json
+          id: version
+          shell: bash
+          run: |
+              VERSION=$(jq -r '.version' package.json)
+              echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
