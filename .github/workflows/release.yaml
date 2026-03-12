@@ -1,3 +1,5 @@
+# パッケージのリリースを行うワークフロー
+
 name: Release package
 
 on:
