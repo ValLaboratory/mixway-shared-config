@@ -61,11 +61,11 @@ jobs:
                   git add -f dist/
                   git commit -m "release v${VERSION}"
 
-                  # バージョン番号でタグを打つ
-                  git tag "v${VERSION}"
+                  # バージョン番号でタグを打つ（既存の場合は上書き）
+                  git tag -f "v${VERSION}"
 
-                  # タグのみプッシュ（ブランチはプッシュしない）
-                  git push origin "v${VERSION}"
+                  # タグのみプッシュ（ブランチはプッシュしない、既存タグも更新）
+                  git push origin "v${VERSION}" --force
 
             - name: Create GitHub Release
               env:
