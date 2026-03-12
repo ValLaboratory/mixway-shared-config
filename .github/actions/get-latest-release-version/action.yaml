@@ -12,6 +12,8 @@ runs:
         - name: Get latest release version
           id: version
           shell: bash
+          env:
+              GH_TOKEN: ${{ github.token }}
           run: |
               # 最新のリリースタグを取得（ドラフトは除外される）
               TAG=$(gh release view --json tagName --jq '.tagName' 2>/dev/null || echo "")
