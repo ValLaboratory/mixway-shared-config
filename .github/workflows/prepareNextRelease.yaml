@@ -21,6 +21,7 @@ concurrency:
 jobs:
     check-status:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
 
         steps:
             - name: Checkout code
@@ -48,6 +49,7 @@ jobs:
 
     create-pr:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
 
         needs: check-status
         if: needs.check-status.outputs.should-create-pr == 'true'

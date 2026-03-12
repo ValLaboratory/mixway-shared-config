@@ -8,9 +8,13 @@ on:
 permissions:
     contents: write
 
+concurrency:
+    group: release-package
+
 jobs:
     check-status:
         runs-on: ubuntu-latest
+        timeout-minutes: 15
 
         steps:
             - name: Checkout code
@@ -30,7 +34,7 @@ jobs:
 
     release:
         runs-on: ubuntu-latest
-
+        timeout-minutes: 15
         needs: check-status
         if: needs.check-status.outputs.ready == 'true'
 
