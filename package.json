@@ -8,7 +8,10 @@
         "fmt:check": "dprint check",
         "check": "tsc",
         "lint": "npx eslint --flag unstable_native_nodejs_ts_config",
-        "build": "node build/build.ts"
+        "build": "tsdown"
+    },
+    "engines": {
+        "node": ">=24.0.0"
     },
     "files": [
         "dist/"
@@ -57,6 +60,7 @@
         "@types/node": "^25.4.0",
         "dprint": "^0.52.0",
         "eslint": "^10.0.3",
+        "tsdown": "^0.21.2",
         "typescript": "^5.9.3"
     }
 }
