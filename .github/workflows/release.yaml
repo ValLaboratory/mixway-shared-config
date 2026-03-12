@@ -32,7 +32,8 @@ jobs:
 
         outputs:
             ready: ${{ steps.check-release-ready.outputs.ready }}
-            package-version: ${{ steps.check-release-ready.outputs.package-version }}
+            next-version: ${{ steps.check-release-ready.outputs.package-version }}
+            previous-version: ${{ steps.check-release-ready.outputs.release-version }}
 
     release:
         runs-on: ubuntu-latest
@@ -55,23 +56,25 @@ jobs:
 
             - name: Commit dist and create tag
               env:
-                  VERSION: ${{ needs.check-status.outputs.package-version }}
+                  NEXT_VERSION: ${{ needs.check-status.outputs.next-version }}
               run: |
                   # distフォルダをステージングしてコミット（.gitignoreで除外されているため-fで強制追加）
                   git add -f dist/
-                  git commit -m "release v${VERSION}"
+                  git commit -m "release v${NEXT_VERSION}"
 
                   # バージョン番号でタグを打つ（既存の場合は上書き）
-                  git tag -f "v${VERSION}"
+                  git tag -f "v${NEXT_VERSION}"
 
                   # タグのみプッシュ（ブランチはプッシュしない、既存タグも更新）
-                  git push origin "v${VERSION}" --force
+                  git push origin "v${NEXT_VERSION}" --force
 
             - name: Create GitHub Release
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  VERSION: ${{ needs.check-status.outputs.package-version }}
+                  NEXT_VERSION: ${{ needs.check-status.outputs.next-version }}
+                  PREVIOUS_VERSION: ${{ needs.check-status.outputs.previous-version }}
               run: |
-                  gh release create "v${VERSION}" \
-                    --title "v${VERSION}" \
-                    --generate-notes
+                  gh release create "v${NEXT_VERSION}" \
+                    --generate-notes \
+                    --notes-start-tag "v${PREVIOUS_VERSION}" \
+                    --verify-tag
