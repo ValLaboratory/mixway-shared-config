@@ -1,0 +1,91 @@
+# mainブランチが更新されたときに、リリース準備のPRを作成するワークフロー
+
+name: Prepare Next Release
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    # バージョンのアップデート作業を行うブランチ名
+    BRANCH_NAME: auto/bump-version
+
+permissions:
+    contents: write
+    pull-requests: write
+
+concurrency:
+    group: prepare-next-release
+
+jobs:
+    check-status:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - name: Setup Node.js
+              uses: ./.github/actions/setup-node
+
+            # 既にpackage.jsonのバージョンが上がっているかどうか
+            # 既に上がっている場合はPRを作成せずに終了
+            - name: Check if release is ready
+              id: check-release-ready
+              uses: ./.github/actions/check-release-ready
+
+            # 既にpackage.jsonのバージョンを上げるPRが存在しているかどうか
+            # 既に存在している場合はPRを作成せずに終了
+            - name: Check if PR already exists
+              id: check-pr-exists
+              run: |
+                  PR_NUMBER=$(gh pr list --head "$BRANCH_NAME" --base main --state open --json number --jq '.[0].number')
+                  echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+        outputs:
+            should_create_pr: ${{ case(steps.check-release-ready.outputs.ready == 'true' && steps.check-pr-exists.outputs.pr_number == '', 'true', 'false') }}
+
+    create-pr:
+        runs-on: ubuntu-latest
+
+        needs: check-status
+        if: needs.check-status.outputs.should_create_pr == 'true'
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v6
+
+            - name: Setup Node.js
+              uses: ./.github/actions/setup-node
+
+            - name: Setup Git user
+              uses: ./.github/actions/setup-git-user
+
+            - name: Bump Version
+              id: bump-version
+              # package.jsonのバージョンを上げる（Gitのタグは作成しない）
+              run: |
+                  NEW_VERSION=$(npm version minor --no-git-tag-version)
+                  echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+            - name: Create Pull Request
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  PR_TITLE: "Release v${{ steps.bump-version.outputs.new_version }}"
+                  PR_BODY: |
+                      v${{ steps.bump-version.outputs.new_version }}をリリースします。
+
+                      > [!NOTE]
+                      > このプルリクエストをマージすると、自動で新しいバージョンが公開されます。
+              run: |
+                  git switch -c "$BRANCH_NAME"
+                  git add package.json package-lock.json
+                  git commit -m "chore: bump version"
+                  git push -f origin "$BRANCH_NAME"
+
+                  gh pr create \
+                      --title "$PR_TITLE" \
+                      --body "$PR_BODY" \
+                      --base main \
+                      --head "$BRANCH_NAME"
