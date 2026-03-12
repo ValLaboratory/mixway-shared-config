@@ -47,7 +47,7 @@ jobs:
                   echo "pr-number=$PR_NUMBER" >> $GITHUB_OUTPUT
 
         outputs:
-            should-create-pr: ${{ case(steps.check-release-ready.outputs.ready == 'true' && steps.check-pr-exists.outputs.pr-number == '', 'true', 'false') }}
+            should-create-pr: ${{ case(steps.check-release-ready.outputs.ready == 'false' && steps.check-pr-exists.outputs.pr-number == '', 'true', 'false') }}
 
     create-pr:
         runs-on: ubuntu-latest
