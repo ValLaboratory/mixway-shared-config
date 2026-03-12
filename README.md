@@ -135,7 +135,7 @@ flowchart TB
 
     subgraph リリース
         direction LR
-        B1((トリガー:<br>バージョン更新PRを<br>mainにマージ)) --> B2{package.jsonのバージョン====最新リリース?}
+        B1((トリガー:<br>バージョン更新PRを<br>mainにマージ)) --> B2{package.jsonのバージョン===最新リリース?}
 
         B2 -- 一致 --> B3(("終了<br>(リリース済み)"))
         B2 -- 不一致 --> B4["ビルドを実行しリリース(自動)"]
