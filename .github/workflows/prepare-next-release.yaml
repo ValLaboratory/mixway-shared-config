@@ -73,6 +73,13 @@ jobs:
                   NEW_VERSION=$(npm version minor --no-git-tag-version)
                   echo "new-version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
+            # READMEのインストールコマンド内のバージョン表記を更新する
+            - name: Update README version
+              env:
+                  NEW_VERSION: ${{ steps.bump-version.outputs.new-version }}
+              run: |
+                  sed -i "s|ValLaboratory/mixway-shared-config#v[0-9]*\.[0-9]*\.[0-9]*|ValLaboratory/mixway-shared-config#${NEW_VERSION}|g" README.md
+
             - name: Create Pull Request
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -84,7 +91,7 @@ jobs:
                       > このプルリクエストをマージすると、自動で新しいバージョンが公開されます。
               run: |
                   git switch -c "$BRANCH_NAME"
-                  git add package.json package-lock.json
+                  git add package.json package-lock.json README.md
                   git commit -m "chore: bump version"
                   git push -f origin "$BRANCH_NAME"
 
