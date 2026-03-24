@@ -9,8 +9,9 @@ updates:
           day: "tuesday"
           time: "09:00"
           timezone: "Asia/Tokyo"
-      labels:
-          - dependencies
+      cooldown:
+          # 更新を30日間保留する
+          default-days: 30
       groups:
           minor-and-patch:
               patterns:
