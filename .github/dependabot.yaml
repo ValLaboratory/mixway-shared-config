@@ -11,6 +11,11 @@ updates:
           timezone: "Asia/Tokyo"
       labels:
           - dependencies
+      cooldown:
+          # 更新を30日間保留する (社内パッケージは除く)
+          default-days: 30
+          exclude:
+              - "@vallaboratory/*"
       groups:
           minor-and-patch:
               patterns:
