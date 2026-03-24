@@ -1,6 +1,6 @@
 {
     "name": "@vallaboratory/mixway-shared-config",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "株式会社ヴァル研究所 mixway Teamが内部で利用する設定ファイルを配布するライブラリ",
     "type": "module",
     "scripts": {
