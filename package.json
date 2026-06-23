@@ -47,7 +47,7 @@
         "eslint-import-resolver-typescript": "^4.4.4",
         "eslint-plugin-awscdk": "^4.3.3",
         "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-jsdoc": "^62.9.0",
+        "eslint-plugin-jsdoc": "^63.0.0",
         "typescript-eslint": "^8.59.3"
     },
     "peerDependencies": {
