@@ -14,9 +14,7 @@
         "allowImportingTsExtensions": true, // TypeScriptファイルをimportする際に拡張子.tsを使用する
         "resolveJsonModule": true, // JSONファイルのimportを許可する
         "isolatedModules": true, // export typeを明示的に書く
-        "esModuleInterop": false, // default importを厳密に行うためfalseにする
         "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字を区別する
-        "allowSyntheticDefaultImports": false, // default importを厳密に行う
         "noUncheckedSideEffectImports": true, // 副作用のないimportをエラーにする
         "erasableSyntaxOnly": true, // enumなどのTypeScriptの独自構文を許可しない
 
