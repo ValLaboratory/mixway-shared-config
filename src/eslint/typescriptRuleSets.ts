@@ -90,6 +90,21 @@ export function typescriptRuleSets(options: TypeScriptRuleSetOptions = {}) {
                     selector: ':matches(PropertyDefinition, MethodDefinition)[accessibility="private"]',
                     message: "Use #private instead",
                 }],
+
+                // Promiseを返す関数では、return awaitを使用することを強制する
+                "@typescript-eslint/return-await": ["error", "always"],
+
+                // 必ずtrueになるif文や、必ずfalseになるif文はエラーにする
+                "@typescript-eslint/no-unnecessary-condition": ["error", {
+                    // 不要な型ガード関数についてもエラーにする
+                    checkTypePredicates: true,
+                }],
+
+                // 不要なvoid型の使用をエラーにする
+                "@typescript-eslint/no-invalid-void-type": ["error", {
+                    // `@typescript-eslint/unbound-method`と競合しないよう、thisパラメータとしてのvoid型の使用は許可する
+                    allowAsThisParameter: true,
+                }],
             },
         },
     ]);
