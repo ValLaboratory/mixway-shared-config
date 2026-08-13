@@ -105,6 +105,9 @@ export function typescriptRuleSets(options: TypeScriptRuleSetOptions = {}) {
                     // `@typescript-eslint/unbound-method`と競合しないよう、thisパラメータとしてのvoid型の使用は許可する
                     allowAsThisParameter: true,
                 }],
+
+                // switch-caseで全てのケースを網羅していない場合にエラーにする
+                "@typescript-eslint/switch-exhaustiveness-check": "error",
             },
         },
     ]);
