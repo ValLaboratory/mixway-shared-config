@@ -8,6 +8,8 @@ export interface VitestRuleSetOptions {
 
 /**
  * Vitest用のESLintルール
+ *
+ * このルールセットは型情報を必要とします。`defaultRuleSets`か`typescriptRuleSets`と併用して利用してください。
  * @param options オプション
  * @returns ESLintのルールセット
  */
