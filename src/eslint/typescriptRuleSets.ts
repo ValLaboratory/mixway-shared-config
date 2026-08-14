@@ -91,7 +91,7 @@ export function typescriptRuleSets(options: TypeScriptRuleSetOptions = {}) {
                     message: "Use #private instead",
                 }],
 
-                // Promiseを返す関数では、return awaitを使用することを強制する
+                // async関数でPromiseを返す場合、return awaitを使用することを強制する
                 "@typescript-eslint/return-await": ["error", "always"],
 
                 // 必ずtrueになるif文や、必ずfalseになるif文はエラーにする
