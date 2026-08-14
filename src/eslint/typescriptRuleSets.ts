@@ -108,6 +108,9 @@ export function typescriptRuleSets(options: TypeScriptRuleSetOptions = {}) {
 
                 // switch-caseで全てのケースを網羅していない場合にエラーにする
                 "@typescript-eslint/switch-exhaustiveness-check": "error",
+
+                // `object["foo"]`ではなく`object.foo`の形式でのプロパティアクセスを強制する
+                "@typescript-eslint/dot-notation": "error",
             },
         },
     ]);
