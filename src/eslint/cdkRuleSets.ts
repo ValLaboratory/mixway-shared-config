@@ -2,8 +2,8 @@ import { configs as cdkConfigs } from "eslint-plugin-awscdk";
 import { defineConfig } from "eslint/config";
 
 export interface CdkRuleSetOptions {
-    /** CDKコンストラクトのファイルパターンの配列。 */
-    cdkFiles: string[];
+    /** CDKコンストラクトのファイルパターンの配列。少なくとも1件以上のファイルパターンを指定する。 */
+    cdkFiles: [string, ...string[]];
 }
 
 /**
