@@ -28,9 +28,6 @@ export function vitestRuleSets(options: VitestRuleSetOptions = {}) {
                     typecheck: true,
                 },
             },
-            languageOptions: {
-                globals: vitest.environments.env.globals,
-            },
             // recommendedルールに加えて以下のルールも適用する
             rules: {
                 // `vitest.xxx`ではなく`vi.xxx`に統一する
@@ -43,6 +40,8 @@ export function vitestRuleSets(options: VitestRuleSetOptions = {}) {
                 "vitest/prefer-each": "error",
                 // `expect(a === b).toBe(true)`ではなく`expect(a).toBe(b)`を使う
                 "vitest/prefer-equality-matcher": "error",
+                // `describe`等はグローバル変数ではなく、`vitest`からのimportを強制する
+                "vitest/prefer-importing-vitest-globals": "error",
                 // `toEqual()`ではなく、より厳密に比較する`toStrictEqual()`を使う
                 "vitest/prefer-strict-equal": "error",
                 // プリミティブの比較には`toEqual()`ではなく`toBe()`を使う
