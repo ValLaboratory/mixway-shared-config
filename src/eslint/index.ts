@@ -33,3 +33,4 @@ export * from "./importRuleSets.ts";
 export * from "./jsdocRuleSets.ts";
 export * from "./linterOptionsRuleSets.ts";
 export * from "./typescriptRuleSets.ts";
+export * from "./vitestRuleSets.ts";
