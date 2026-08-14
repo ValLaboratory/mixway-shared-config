@@ -26,7 +26,7 @@ mixway Team で利用する標準的なコーディング規約・フォーマ�
 ## インストール
 
 ```bash
-npm install --save-dev github:ValLaboratory/mixway-shared-config#v1.4.0
+npm install --save-dev github:ValLaboratory/mixway-shared-config#v1.5.0
 ```
 
 ## 使用方法
