@@ -14,16 +14,15 @@
         "allowImportingTsExtensions": true, // TypeScriptファイルをimportする際に拡張子.tsを使用する
         "resolveJsonModule": true, // JSONファイルのimportを許可する
         "isolatedModules": true, // export typeを明示的に書く
-        "esModuleInterop": false, // default importを厳密に行うためfalseにする
         "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字を区別する
-        "allowSyntheticDefaultImports": false, // default importを厳密に行う
-        "noUncheckedSideEffectImports": true, // 副作用のないimportをエラーにする
+        "noUncheckedSideEffectImports": true, // 解決できないside-effect importをエラーにする
         "erasableSyntaxOnly": true, // enumなどのTypeScriptの独自構文を許可しない
 
         "noUnusedLocals": true, // 未使用変数はエラー
         "noUnusedParameters": true, // 未使用引数はエラー
         "allowUnusedLabels": false, // 未使用ラベルはエラー
         "noImplicitReturns": true, // returnの書き忘れを検出
+        "noImplicitOverride": true, // スーパークラスのメソッドをオーバーライドする際にoverrideを明示的に書く
         "noFallthroughCasesInSwitch": true, // switch-caseのbreak忘れを検出
         "allowUnreachableCode": false, // 到達できないコードはエラー
         "noUncheckedIndexedAccess": true, // プロパティアクセスを厳密にする
