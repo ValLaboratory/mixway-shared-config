@@ -58,7 +58,7 @@
         "typescript": "^6.0.0"
     },
     "devDependencies": {
-        "@types/node": "^24.13.3",
+        "@types/node": "^26.1.1",
         "dprint": "^0.55.0",
         "eslint": "^10.6.0",
         "tsdown": "^0.22.3",
