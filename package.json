@@ -42,14 +42,14 @@
     "dependencies": {
         "@eslint/compat": "^2.1.0",
         "@eslint/js": "^10.0.1",
-        "@typescript-eslint/parser": "^8.62.0",
+        "@typescript-eslint/parser": "^8.64.0",
         "@vitest/eslint-plugin": "^1.6.27",
         "eslint-config-flat-gitignore": "^2.3.0",
         "eslint-import-resolver-typescript": "^4.4.5",
         "eslint-plugin-awscdk": "^4.3.3",
         "eslint-plugin-import": "^2.32.0",
-        "eslint-plugin-jsdoc": "^63.0.13",
-        "typescript-eslint": "^8.62.0"
+        "eslint-plugin-jsdoc": "^63.1.0",
+        "typescript-eslint": "^8.64.0"
     },
     "peerDependencies": {
         "@types/node": "*",
@@ -59,9 +59,9 @@
     },
     "devDependencies": {
         "@types/node": "^24.13.3",
-        "dprint": "^0.55.0",
-        "eslint": "^10.6.0",
-        "tsdown": "^0.22.3",
+        "dprint": "^0.55.2",
+        "eslint": "^10.7.0",
+        "tsdown": "^0.22.9",
         "typescript": "^6.0.3"
     }
 }
